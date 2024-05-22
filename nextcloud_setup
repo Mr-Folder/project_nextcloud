@@ -1,0 +1,2 @@
+export APP_HOST=127.0.0.1
+export APP_PASSWORD=$(kubectl get secret --namespace default nextcloud -o jsonpath="{.data.nextcloud-password}" | base64 --decode)
