@@ -18,20 +18,20 @@ spec:
       database: nextcloud
       enabled: true
       existingSecret:
-        enabled: false
-        passwordKey: db-password
+        enabled: true
+        secretName: postgres-database-password
         usernameKey: db-username
+        passwordKey: db-password
       host: "nextcloud-db.cu8h8rsvexrg.us-east-1.rds.amazonaws.com"
-      password: postgres
       type: postgresql
-      user: postgres
-    fullnameOverride: ""
+
     ingress:
       annotations: {}
       enabled: false
       labels: {}
       path: /
       pathType: Prefix
+
     nextcloud:
       configs: {}
       containerPort: 80
@@ -52,6 +52,7 @@ spec:
       podSecurityContext: {}
       securityContext: {}
       username: admin
+
     redis:
       enabled: true
       master:
@@ -63,6 +64,7 @@ spec:
           enabled: false
       replicaService: nextcloud-redis-replica
     replicaCount: 1
+
     service:
       loadBalancerIP: ""
       nodePort: nil
