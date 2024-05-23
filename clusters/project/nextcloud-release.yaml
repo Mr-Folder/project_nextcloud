@@ -40,7 +40,7 @@ spec:
         enabled: true
         usernameKey: nextcloud-username
         passwordKey: nextcloud-password
-      host: project_nextcloud.likir09.fr
+      host: project-nextcloud.likir09.fr
       password: admin
       persistence:
         subPath: null
