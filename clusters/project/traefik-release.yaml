@@ -17,7 +17,7 @@ spec:
     additionalArguments:
       - --certificatesresolvers.letsencrypt.acme.caServer=https://acme-v02.api.letsencrypt.org/directory
       - --certificatesresolvers.letsencrypt.acme.httpChallenge.entryPoint=web
-      - --certificatesresolvers.letsencrypt.acme.storage=/tmp/acme/acme.json
+      - --certificatesresolvers.letsencrypt.acme.storage=/tmp/acme.json
     ports:
       web:
         redirectTo: 
@@ -26,7 +26,3 @@ spec:
         tls:
           enabled: true
           certResolver: letsencrypt
-    securityContext:
-      readOnlyRootFilesystem: false
-    image:
-      entrypoint: ["sh", "-c", "mkdir -p /tmp/acme && touch /tmp/acme/acme.json && chmod 600 /tmp/acme/acme.json && /entrypoint.sh"]
