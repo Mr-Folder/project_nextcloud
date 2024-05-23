@@ -17,6 +17,7 @@ spec:
     additionalArguments:
       - --certificatesresolvers.letsencrypt.acme.caServer=https://acme-v02.api.letsencrypt.org/directory
       - --certificatesresolvers.letsencrypt.acme.httpChallenge.entryPoint=web
+      - --certificatesresolvers.letsencrypt.acme.storage=/acme.json
     ports:
       web:
         redirectTo: 
@@ -25,3 +26,10 @@ spec:
         tls:
           enabled: true
           certResolver: letsencrypt
+    volumes:
+      - name: acme-storage
+        emptyDir: {}
+    volumeMounts:
+      - name: acme-storage
+        mountPath: /acme.json
+        subPath: acme.json
