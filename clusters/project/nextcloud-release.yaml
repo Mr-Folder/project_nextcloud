@@ -14,14 +14,6 @@ spec:
         name: nextcloud
   interval: 1m0s
   values:
-    affinity: {}
-    cronjob:
-      enabled: false
-      lifecycle: {}
-      resources: {}
-      securityContext: {}
-    deploymentAnnotations: {}
-    deploymentLabels: {}
     externalDatabase:
       database: nextcloud
       enabled: true
@@ -34,84 +26,16 @@ spec:
       type: postgresql
       user: postgres
     fullnameOverride: ""
-    hpa:
-      cputhreshold: 60
-      enabled: false
-      maxPods: 10
-      minPods: 1
-    image:
-      flavor: apache
-      pullPolicy: IfNotPresent
-      repository: nextcloud
-      tag: null
     ingress:
       annotations: {}
       enabled: false
       labels: {}
       path: /
       pathType: Prefix
-    internalDatabase:
-      enabled: false
-      name: nextcloud
-    lifecycle: {}
-    livenessProbe:
-      enabled: true
-      failureThreshold: 3
-      initialDelaySeconds: 10
-      periodSeconds: 10
-      successThreshold: 1
-      timeoutSeconds: 5
-    mariadb:
-      architecture: standalone
-      auth:
-        database: nextcloud
-        existingSecret: ""
-        password: changeme
-        username: nextcloud
-      enabled: false
-      primary:
-        persistence:
-          accessMode: ReadWriteOnce
-          enabled: false
-          size: 8Gi
-    metrics:
-      enabled: false
-      https: false
-      image:
-        pullPolicy: IfNotPresent
-        repository: xperimental/nextcloud-exporter
-        tag: 0.6.2
-      replicaCount: 1
-      service:
-        annotations:
-          prometheus.io/port: "9205"
-          prometheus.io/scrape: "true"
-        labels: {}
-        type: ClusterIP
-      serviceMonitor:
-        enabled: false
-        interval: 30s
-        jobLabel: ""
-        labels: {}
-        namespace: ""
-        namespaceSelector: {}
-        scrapeTimeout: ""
-      timeout: 5s
-      tlsSkipVerify: false
-      token: ""
-    nameOverride: ""
     nextcloud:
       configs: {}
       containerPort: 80
       datadir: /var/www/html/data
-      defaultConfigs:
-        .htaccess: true
-        apache-pretty-urls.config.php: true
-        apcu.config.php: true
-        apps.config.php: true
-        autoconfig.php: true
-        redis.config.php: true
-        smtp.config.php: true
       existingSecret:
         enabled: false
         passwordKey: nextcloud-password
@@ -120,101 +44,15 @@ spec:
         smtpUsernameKey: smtp-username
         tokenKey: nextcloud-token
         usernameKey: nextcloud-username
-      extraEnv: []
-      extraInitContainers: []
-      extraSidecarContainers: []
-      extraVolumeMounts: []
-      extraVolumes: []
-      hooks:
-        before-starting: ""
-        post-installation: ""
-        post-upgrade: ""
-        pre-installation: ""
-        pre-upgrade: ""
       host: nextcloud.kube.local
-      mail:
-        domain: domain.com
-        enabled: false
-        fromAddress: user
-        smtp:
-          authtype: LOGIN
-          host: domain.com
-          name: user
-          password: pass
-          port: 465
-          secure: ssl
       password: admin
       persistence:
         subPath: null
       phpConfigs: {}
       podSecurityContext: {}
       securityContext: {}
-      strategy:
-        type: Recreate
-      update: 0
       username: admin
-    nginx:
-      config:
-        default: true
-      containerPort: 80
-      enabled: false
-      image:
-        pullPolicy: IfNotPresent
-        repository: nginx
-        tag: alpine
-      resources: {}
-      securityContext: {}
-    nodeSelector: {}
-    persistence:
-      accessMode: ReadWriteOnce
-      annotations: {}
-      enabled: false
-      nextcloudData:
-        accessMode: ReadWriteOnce
-        annotations: {}
-        enabled: false
-        size: 8Gi
-        subPath: null
-      size: 8Gi
-    phpClientHttpsFix:
-      enabled: false
-      protocol: https
-    podAnnotations: {}
-    postgresql:
-      enabled: false
-      global:
-        postgresql:
-          auth:
-            database: nextcloud
-            existingSecret: ""
-            password: postgres
-            secretKeys:
-              adminPasswordKey: ""
-              replicationPasswordKey: ""
-              userPasswordKey: ""
-            username: postgres
-      primary:
-        persistence:
-          enabled: false
-    rbac:
-      enabled: false
-      serviceaccount:
-        annotations: {}
-        create: true
-        name: nextcloud-serviceaccount
-    readinessProbe:
-      enabled: true
-      failureThreshold: 3
-      initialDelaySeconds: 10
-      periodSeconds: 10
-      successThreshold: 1
-      timeoutSeconds: 5
     redis:
-      auth:
-        enabled: false
-        existingSecret: ""
-        existingSecretPasswordKey: ""
-        password: changeme
       enabled: true
       master:
         persistence:
@@ -225,18 +63,8 @@ spec:
           enabled: false
       replicaService: nextcloud-redis-replica
     replicaCount: 1
-    resources: {}
-    securityContext: {}
     service:
       loadBalancerIP: ""
       nodePort: nil
       port: 8080
       type: ClusterIP
-    startupProbe:
-      enabled: false
-      failureThreshold: 30
-      initialDelaySeconds: 30
-      periodSeconds: 10
-      successThreshold: 1
-      timeoutSeconds: 5
-    tolerations: []
