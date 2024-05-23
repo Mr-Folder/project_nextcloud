@@ -40,7 +40,7 @@ spec:
         enabled: true
         usernameKey: nextcloud-username
         passwordKey: nextcloud-password
-      host: a337971dd5f9b4bd298cfb846f5730bc-1419117207.us-east-1.elb.amazonaws.com
+      host: project_nextcloud.likir09.fr
       password: admin
       persistence:
         subPath: null
