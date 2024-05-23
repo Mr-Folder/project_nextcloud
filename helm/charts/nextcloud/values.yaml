@@ -210,7 +210,7 @@ externalDatabase:
   type: postgresql
 
   ## Database host
-  host: ""
+  host: "nextcloud-db.cu8h8rsvexrg.us-east-1.rds.amazonaws.com"
 
   ## Database user
   user: postgres

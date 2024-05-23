@@ -29,7 +29,7 @@ spec:
         enabled: false
         passwordKey: db-password
         usernameKey: db-username
-      host: ""
+      host: "nextcloud-db.cu8h8rsvexrg.us-east-1.rds.amazonaws.com"
       password: postgres
       type: postgresql
       user: postgres
