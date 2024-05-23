@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta2
 kind: HelmRelease
 metadata:
   name: nextcloud
-  namespace: flux-system
+  namespace: nextcloud
 spec:
   chart:
     spec:
@@ -24,15 +24,15 @@ spec:
     deploymentLabels: {}
     externalDatabase:
       database: nextcloud
-      enabled: true
+      enabled: false
       existingSecret:
         enabled: false
         passwordKey: db-password
         usernameKey: db-username
       host: ""
-      password: postgres
-      type: postgresql
-      user: postgres
+      password: ""
+      type: mysql
+      user: nextcloud
     fullnameOverride: ""
     hpa:
       cputhreshold: 60
@@ -51,7 +51,7 @@ spec:
       path: /
       pathType: Prefix
     internalDatabase:
-      enabled: false
+      enabled: true
       name: nextcloud
     lifecycle: {}
     livenessProbe:
@@ -181,18 +181,18 @@ spec:
       protocol: https
     podAnnotations: {}
     postgresql:
-      enabled: true
+      enabled: false
       global:
         postgresql:
           auth:
             database: nextcloud
             existingSecret: ""
-            password: postgres
+            password: changeme
             secretKeys:
               adminPasswordKey: ""
               replicationPasswordKey: ""
               userPasswordKey: ""
-            username: postgres
+            username: nextcloud
       primary:
         persistence:
           enabled: false
