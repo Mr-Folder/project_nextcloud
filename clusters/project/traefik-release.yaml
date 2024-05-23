@@ -17,7 +17,6 @@ spec:
     additionalArguments:
       - --certificatesresolvers.letsencrypt.acme.caServer=https://acme-v02.api.letsencrypt.org/directory
       - --certificatesresolvers.letsencrypt.acme.httpChallenge.entryPoint=web
-      - --certificatesresolvers.letsencrypt.acme.storage=/ssl-certs/acme-generic.json
     ports:
       web:
         redirectTo: 
