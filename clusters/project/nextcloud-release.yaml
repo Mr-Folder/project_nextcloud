@@ -181,7 +181,7 @@ spec:
       protocol: https
     podAnnotations: {}
     postgresql:
-      enabled: true
+      enabled: false
       global:
         postgresql:
           auth:
