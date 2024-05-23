@@ -1,0 +1,41 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta2
+kind: HelmRelease
+metadata:
+  name: traefik
+  namespace: traefik
+spec:
+  chart:
+    spec:
+      chart: traefik
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: HelmRepository
+        name: traefik
+  interval: 1m0s
+  values:
+    additionalArguments:
+      - --certificatesresolvers.letsencrypt.acme.caServer=https://acme-v02.api.letsencrypt.org/directory
+      - --certificatesresolvers.letsencrypt.acme.httpChallenge.entryPoint=web
+      - --certificatesresolvers.letsencrypt.acme.storage=/ssl-certs/acme-generic.json
+    persistence:
+      enabled: true
+      name: ssl-certs
+      size: 1Gi
+      path: /ssl-certs
+    deployment:
+      initContainers:
+        - name: volume-permissions
+          image: busybox:latest
+          command: ["sh", "-c", "touch /ssl-certs/acme.json; chmod -v 600 /ssl-certs/acme.json"]
+          volumeMounts:
+            - name: ssl-certs
+              mountPath: /ssl-certs
+    ports:
+      web:
+        redirectTo: 
+          port: websecure
+      websecure:
+        tls:
+          enabled: true
+          certResolver: letsencrypt
