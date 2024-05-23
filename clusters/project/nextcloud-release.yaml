@@ -19,7 +19,7 @@ spec:
       enabled: true
       existingSecret:
         enabled: true
-        secretName: postgres-database-password
+        secretName: postgres
         usernameKey: db-username
         passwordKey: db-password
       host: "nextcloud-db.cu8h8rsvexrg.us-east-1.rds.amazonaws.com"
@@ -37,13 +37,10 @@ spec:
       containerPort: 80
       datadir: /var/www/html/data
       existingSecret:
-        enabled: false
-        passwordKey: nextcloud-password
-        smtpHostKey: smtp-host
-        smtpPasswordKey: smtp-password
-        smtpUsernameKey: smtp-username
-        tokenKey: nextcloud-token
+        enabled: true
         usernameKey: nextcloud-username
+        passwordKey: nextcloud-password
+          # tokenKey: nextcloud-token
       host: nextcloud.kube.local
       password: admin
       persistence:
@@ -55,6 +52,10 @@ spec:
 
     redis:
       enabled: true
+      auth:
+        enabled: true
+        existingSecret: nextcloud-redis
+        existingSecretPasswordKey: redis-password
       master:
         persistence:
           enabled: false
