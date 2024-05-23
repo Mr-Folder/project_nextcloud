@@ -54,8 +54,10 @@ spec:
       enabled: true
       auth:
         enabled: true
+        password: ""
         existingSecret: nextcloud-redis
         existingSecretPasswordKey: redis-password
+
       master:
         persistence:
           enabled: false
