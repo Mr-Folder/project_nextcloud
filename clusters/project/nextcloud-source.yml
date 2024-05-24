@@ -6,5 +6,4 @@ metadata:
   namespace: nextcloud
 spec:
   interval: 1m0s
-  # url: http://localhost:8080
   url: https://nextcloud.github.io/helm/

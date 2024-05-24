@@ -18,3 +18,10 @@ spec:
       create: true
       passwordHash: $2y$10$zTRdq9bLcEmGF27exGcKZ.LnSNIOpwV.n5H7tLP4/oyuSRGjTk7Ai
       username: admin
+    ingress:
+      enabled: true
+      hosts:
+        - host: gitops.likir09.fr
+          paths:
+            - path: /
+              pathType: Prefix
